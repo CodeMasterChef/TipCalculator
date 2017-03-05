@@ -5,18 +5,25 @@ import {
     Text,
     View,
     Navigator,
-    Button
+    Button,
+    AsyncStorage
 
 } from 'react-native';
-import Calculator from './calculator';
-import CustomNavBar from './customNavBar';
-import Settings from './settings';
+import Calculator from './calculator.js';
+import CustomNavBar from './customNavBar.js';
+import Settings from './settings.js';
 
 export class PowerRanger extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            transition: null
+        }
+    }
     render() {
         return (
             <Navigator
-                initialRoute={{ id: 'CalculatorPage' }}
+                initialRoute={{ id: 'CalculatorPage', transition: 'FloatFromRight' }}
                 renderScene={this.renderScene.bind(this)}
                 configureScene={(route) => {
                     if (route.sceneConfig) {
@@ -47,8 +54,45 @@ export class PowerRanger extends Component {
     // config scene transition, change scene transition based on Setting
     configureScene(route, routeStack) {
         //@Todo, change to scene transition from Asynstorage vale
+        this.getSceneTransition();
+        console.log("transition", this.state.transition);
 
-        return Navigator.SceneConfigs.FloatFromRight;
+        switch (this.state.transition) {
+            case 'FloatFromLeft':
+                return Navigator.SceneConfigs.FloatFromLeft;
+                break;
+            case 'FloatFromBottom':
+                return Navigator.SceneConfigs.FloatFromBottom;
+                break;
+            case 'FloatFromBottomAndroid':
+                return Navigator.SceneConfigs.FloatFromBottomAndroid;
+                break;
+            case 'SwipeFromLeft':
+                return Navigator.SceneConfigs.SwipeFromLeft;
+                break;
+            case 'HorizontalSwipeJump':
+                return Navigator.SceneConfigs.HorizontalSwipeJump;
+                break;
+            case 'HorizontalSwipeJumpFromRight':
+                return Navigator.SceneConfigs.HorizontalSwipeJumpFromRight;
+                break;
+            default:
+                return Navigator.SceneConfigs.FloatFromRight;
+                break;
+
+        }
+
+
+    }
+    async getSceneTransition() {
+        try {
+            var sceneTransitionValue = await AsyncStorage.getItem("SCENE_SELECTED");
+            this.setState({
+                transition: sceneTransitionValue
+            })
+        } catch (error) {
+            console.log("Hmm, something when wrong when get data..." + error);
+        }
     }
 }
 module.exports = PowerRanger

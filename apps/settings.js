@@ -7,7 +7,8 @@ import {
     Navigator,
     Button,
     TextInput,
-    Picker
+    Picker,
+    AsyncStorage
 } from 'react-native';
 
 export class Settings extends Component {
@@ -15,7 +16,8 @@ export class Settings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sceneTransition: 0
+            sceneTransition: 0,
+            scene: 0
         }
     }
     // action to set select value to AsyncStorage
@@ -27,6 +29,17 @@ export class Settings extends Component {
             });
         } catch (error) {
             console.log("Oop!! Something went wrong !!!" + error);
+        }
+    }
+    // set data to AsyncStorage
+    async setSceneTransition(scene) {
+        try {
+            await AsyncStorage.setItem('SCENE_SELECTED', scene);
+            this.setState({
+                sceneTransition: scene
+            })
+        } catch (error) {
+            console.log("Hmm, something when wrong when set data..." + error);
         }
     }
     // get data to AsyncStorage

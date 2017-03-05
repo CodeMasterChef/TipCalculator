@@ -10,11 +10,11 @@ import {
 
 } from 'react-native';
 
-const stylesCSS = StyleSheet.create( {
-    tabbarHeadr : {
-     
+const stylesCSS = StyleSheet.create({
+    tabbarHeadr: {
+
     }
-}) 
+})
 var NavigationBarRouteMapper = {
     LeftButton: (route, navigator, index, navState) => {
         return
@@ -22,13 +22,22 @@ var NavigationBarRouteMapper = {
     RightButton: (route, navigator, index, navState) => {
         if (route.id != 'CalculatorPage') {
             return (
-                <TouchableOpacity style={stylesCSS.tabbarHeadr} onPress={() => navigator.pop()}>
+                <TouchableOpacity style={stylesCSS.tabbarHeadr} onPress={() => {
+                    navigator.pop()
+                }
+
+                }>
                     <Text>Save</Text>
                 </TouchableOpacity>
             );
         } else {
             return (
-                <TouchableOpacity style={stylesCSS.tabbarHeadr} onPress={() => navigator.push({ id: 'SettingsPage' })}>
+                <TouchableOpacity style={stylesCSS.tabbarHeadr} onPress={() =>
+
+
+                    navigator.push({ id: 'SettingsPage' })
+
+                }>
                     <Text style={stylesCSS.headerFontSize}>Settings</Text>
                 </TouchableOpacity>
             );
