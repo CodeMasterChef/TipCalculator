@@ -18,6 +18,17 @@ export class Settings extends Component {
             sceneTransition: 0
         }
     }
+    // action to set select value to AsyncStorage
+    setSelectSceneTransition(scene) {
+        try {
+            this.setSceneTransition(scene);
+            this.setState({
+                scene: scene
+            });
+        } catch (error) {
+            console.log("Oop!! Something went wrong !!!" + error);
+        }
+    }
     // get data to AsyncStorage
     async getSceneTransition() {
         try {

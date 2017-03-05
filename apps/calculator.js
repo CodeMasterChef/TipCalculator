@@ -53,12 +53,7 @@ export class Calculator extends Component {
 
             <View>
 
-                <Button
-                    tyle={{ flex: 1, margin: 5, fontSize: 20 }}
-                    title="Setting"
-                    onPress={() => this.props.navigator.push({ id: 'BlankPage' })}
-                />
-                <View>
+                <View  >
                     <Text>Tip Calculator</Text>
                 </View>
                 <View>
