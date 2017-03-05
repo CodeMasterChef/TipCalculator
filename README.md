@@ -5,3 +5,5 @@ This is React Native project to apply for React Native Fast Track course at code
 Submitted by: Le Van Ninh
 
 Time spent: 5 hours
+
+<img src="https://raw.githubusercontent.com/gitvani/TipCalculator/master/tips.gif">
