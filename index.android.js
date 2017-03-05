@@ -9,37 +9,13 @@ import {
 
 } from 'react-native';
 import Calculator from './apps/calculator.js';
-
+import PowerRanger from './apps/powerRanger.js';
+import Settings from './apps/settings.js';
 export default class TipCalculator extends Component {
   render() {
     return (
-      <Navigator
-        initialRoute={{ id: 'CalculatorPage', title: 'Tip Calculator Page' }}
-        renderScene={(route, navigator) => {
-          switch (route.id) {
-            case 'CalculatorPage':
-              return <Calculator navigator={navigator} />
-              break;
-            case 'BlankPage':
-              return (
-                <View>
-                  <Button
-                    style={{ width: 10, flex: 0.1 }}
-                    title="Go Back"
-                    onPress={() => navigator.pop({ id: "CalculatorPage" })}
-                  />
+      <PowerRanger />
 
-                  <View style={{ flexDirection: 'column' }}>
-                    <Text>Fck ya !!! I'm a blank page, I have nothing !</Text>
-                  </View>
-
-                </View>
-              )
-              break;
-            default:
-          }
-        }}
-      />
 
 
     );
