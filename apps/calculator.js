@@ -18,6 +18,7 @@ export class Calculator extends Component {
             segmentElementIndex: 0,
             billAmount: 0,
             tipAmount: 0,
+            percent: 0,
             result: 0
         }
     }
@@ -41,6 +42,7 @@ export class Calculator extends Component {
         this.setState(
             {
                 tipAmount: tipAmount,
+                percent: percent,
                 result: billAmount + tipAmount
             }
         )
@@ -50,38 +52,63 @@ export class Calculator extends Component {
     }
     render() {
         return (
-
-            <View>
-
-                <View  >
-                    <Text>Tip Calculator</Text>
+            <View style={styles.container}>
+                <View >
+                    <Text style={styles.title}>Tip Calculator</Text>
                 </View>
-                <View>
-                    <Text>Bill Amount</Text>
-                    <TextInput onChangeText={(billAmount) => this.handleBillAmountChange(billAmount)}
+                <View style={{ flexDirection: 'row', paddingTop: 10 }} >
+                    <Text style={{ height: 30, width: 100 }} >Bill Amount</Text>
+                    <TextInput style={styles.billBox} onChangeText={(billAmount) => this.handleBillAmountChange(billAmount)}
                         keyboardType='numeric'
-                        maxLength={10}
+                        maxLength={10} />
+                </View>
+                <View style={{ paddingTop: 10 }}>
+                    <SegmentedControlTab
+                        values={this.segmentValues()}
+                        onTabPress={index => this.handleSegmentIndexChange(index)}
                     />
                 </View>
+                <View>
+                    <View>
+                        <Text>Bill Amount: {this.state.billAmount}</Text>
+                    </View>
+                    <View >
+                        <Text>Tip Amount: {this.state.tipAmount}</Text>
+                    </View>
+                    <View >
+                        <Text>Percent: {parseFloat(this.segmentValues()[this.state.segmentElementIndex]) / 100}</Text>
+                    </View>
+                    <View >
+                        <Text style={styles.result}>Result:  {this.state.result}</Text>
+                    </View>
+                </View>
 
-                <SegmentedControlTab
-                    values={this.segmentValues()}
-                    onTabPress={index => this.handleSegmentIndexChange(index)}
-                />
-                <View >
-                    <Text>Bill Amount:  {this.state.billAmount}</Text>
-                </View>
-                <View >
-                    <Text>Tip Amount:  {this.state.tipAmount}</Text>
-                </View>
-                <View >
-                    <Text>Result:  {this.state.result}</Text>
-                </View>
 
             </View >
 
         );
     }
-}
 
+}
+const styles = StyleSheet.create({
+    title: {
+        fontWeight: '900',
+        fontSize: 18,
+        textAlign: 'center',
+        paddingTop: 30
+    },
+    billBox: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        height: 40,
+        width: 230
+    },
+    container: {
+        padding: 10
+    }
+    , result: {
+        fontWeight: '900',
+        paddingTop: 10
+    }
+})
 module.exports = Calculator
