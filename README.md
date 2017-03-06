@@ -1,6 +1,6 @@
 # Pre-work - *Tip Calculator*
 
-**TipCalculator ** is a tip calculator application for React Native.
+**TipCalculator** is a tip calculator application for React Native.
 
 Submitted by: **Ninh Le**
 
